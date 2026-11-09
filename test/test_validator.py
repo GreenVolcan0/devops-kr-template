@@ -1,4 +1,12 @@
 # tests/test_validator.py
+import os
+import sys
+
+# Добавляем корневую директорию проекта в пути поиска Python
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from validator import validate_email, validate_phone, validate_snils
+
 def test_validate_email():
     assert validate_email("test@example.com") == True
     assert validate_email("invalid") == False
@@ -7,35 +15,7 @@ def test_validate_email():
 def test_validate_snils():
     # Валидные СНИЛС (рассчитаны по алгоритму)
     assert validate_snils("11223344595") == True
-    assert validate_snils("001-001-999 32") == True  # с форматированием
-    
-    # Невалидные: неверный формат
-    assert validate_snils("123") == False              # слишком короткий
-    assert validate_snils("123456789012") == False     # слишком длинный
-    assert validate_snils("abcdefghijk") == False      # не цифры
-    
-    # Невалидные: неверная контрольная сумма
-    assert validate_snils("11223344500") == False
-    
-
-def test_validate_snils():
-    # Валидные СНИЛС (рассчитаны по алгоритму)
-    assert validate_snils("11223344595") == True
-    assert validate_snils("001-001-999 32") == True  # с форматированием
-    
-    # Невалидные: неверный формат
-    assert validate_snils("123") == False              # слишком короткий
-    assert validate_snils("123456789012") == False     # слишком длинный
-    assert validate_snils("abcdefghijk") == False      # не цифры
-    
-    # Невалидные: неверная контрольная сумма
-    assert validate_snils("11223344500") == False
-    
-
-def test_validate_snils():
-    # Валидные СНИЛС (рассчитаны по алгоритму)
-    assert validate_snils("11223344595") == True
-    assert validate_snils("001-001-999 32") == True  # с форматированием
+    assert validate_snils("112-233-445 95") == True  # с форматированием
     
     # Невалидные: неверный формат
     assert validate_snils("123") == False              # слишком короткий
