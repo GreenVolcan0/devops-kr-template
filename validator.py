@@ -1,3 +1,4 @@
+import re
 # validator.py
 def validate_email(email: str) -> bool:
     """Валидация email-адреса."""
